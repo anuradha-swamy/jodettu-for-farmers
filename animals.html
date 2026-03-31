@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Animals - Jodettu</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            color: #333;
+            font-size: 2.5em;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        .search-section {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .search-form {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 12px 20px;
+            border: 2px solid #e1e5e9;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .animals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .animal-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .animal-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .animal-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 18px;
+        }
+
+        .animal-details {
+            padding: 25px;
+        }
+
+        .animal-name {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .animal-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .info-value {
+            font-size: 14px;
+            color: #333;
+            font-weight: 600;
+        }
+
+        .animal-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 14px;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            flex: 1;
+        }
+
+        .btn-edit {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-edit:hover {
+            background: #218838;
+        }
+
+        .btn-delete {
+            background: #dc3545;
+            color: white;
+        }
+
+        .btn-delete:hover {
+            background: #c82333;
+        }
+
+        .btn-view {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .btn-view:hover {
+            background: #138496;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 50px;
+            color: white;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .message.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .message.show {
+            display: block;
+        }
+
+        .empty-state {
+            background: white;
+            border-radius: 15px;
+            padding: 60px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .empty-state h2 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .empty-state p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .vaccination-alert {
+            background: #fff3cd;
+            color: #856404;
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 12px;
+            border-left: 4px solid #ffc107;
+        }
+
+        .vaccination-alert.urgent {
+            background: #f8d7da;
+            color: #721c24;
+            border-left-color: #dc3545;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .animals-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .search-form {
+                flex-direction: column;
+            }
+
+            .animal-info {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🐄 My Animals</h1>
+            <div class="header-actions">
+                <a href="animal_add.html" class="btn btn-primary">➕ Add Animal</a>
+                <button class="btn btn-secondary" onclick="refreshAnimals()">🔄 Refresh</button>
+            </div>
+        </div>
+
+        <div class="search-section">
+            <form class="search-form" onsubmit="searchAnimals(event)">
+                <input type="text" class="search-input" id="searchInput" placeholder="Search animals by name, type, or breed...">
+                <button type="submit" class="btn btn-primary">🔍 Search</button>
+                <button type="button" class="btn btn-secondary" onclick="clearSearch()">Clear</button>
+            </form>
+        </div>
+
+        <div id="message" class="message"></div>
+
+        <div id="loading" class="loading">
+            <div class="spinner"></div>
+            <p>Loading your animals...</p>
+        </div>
+
+        <div id="animalsContainer" class="animals-grid"></div>
+
+        <div id="emptyState" class="empty-state" style="display: none;">
+            <h2>🐾 No Animals Found</h2>
+            <p>You haven't added any animals yet. Start by adding your first animal!</p>
+            <a href="animal_add.html" class="btn btn-primary">➕ Add Your First Animal</a>
+        </div>
+    </div>
+
+    <script>
+        let allAnimals = [];
+
+        // Load all animals
+        async function loadAnimals() {
+            const loading = document.getElementById('loading');
+            const container = document.getElementById('animalsContainer');
+            const emptyState = document.getElementById('emptyState');
+            
+            loading.style.display = 'block';
+            container.innerHTML = '';
+            emptyState.style.display = 'none';
+
+            try {
+                const token = localStorage.getItem('token') || 'demo_token';
+                const response = await fetch('/Jodettu/Animals/all-animals', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Failed to load animals: ${response.statusText}`);
+                }
+
+                const animals = await response.json();
+                allAnimals = animals;
+                displayAnimals(animals);
+
+            } catch (error) {
+                showMessage(`Error loading animals: ${error.message}`, 'error');
+            } finally {
+                loading.style.display = 'none';
+            }
+        }
+
+        // Display animals
+        function displayAnimals(animals) {
+            const container = document.getElementById('animalsContainer');
+            const emptyState = document.getElementById('emptyState');
+
+            if (animals.length === 0) {
+                container.innerHTML = '';
+                emptyState.style.display = 'block';
+                return;
+            }
+
+            emptyState.style.display = 'none';
+            container.innerHTML = animals.map(animal => createAnimalCard(animal)).join('');
+        }
+
+        // Create animal card HTML
+        function createAnimalCard(animal) {
+            const imageUrl = animal.images && animal.images.length > 0 
+                ? `data:image/jpeg;base64,${animal.images[0].data}` 
+                : 'https://via.placeholder.com/350x200?text=No+Image';
+            
+            const vaccinationAlerts = animal.vaccination_notifications || [];
+            const alertHtml = vaccinationAlerts.map(alert => 
+                `<div class="vaccination-alert ${alert.severity === 'urgent' ? 'urgent' : ''}">${alert.message}</div>`
+            ).join('');
+
+            return `
+                <div class="animal-card">
+                    <img src="${imageUrl}" alt="${animal.own_animal_name}" class="animal-image" 
+                         onerror="this.src='https://via.placeholder.com/350x200?text=No+Image'">
+                    <div class="animal-details">
+                        <div class="animal-name">${animal.own_animal_name}</div>
+                        ${alertHtml}
+                        <div class="animal-info">
+                            <div class="info-item">
+                                <span class="info-label">Type</span>
+                                <span class="info-value">${animal.own_animal_type}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Breed</span>
+                                <span class="info-value">${animal.own_animal_breed}</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Age</span>
+                                <span class="info-value">${animal.own_animal_age} years</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Weight</span>
+                                <span class="info-value">${animal.own_animal_weight} kg</span>
+                            </div>
+                        </div>
+                        <div class="animal-actions">
+                            <a href="animal_edit.html?id=${animal.own_animal_id}" class="btn-small btn-edit">✏️ Edit</a>
+                            <button class="btn-small btn-view" onclick="viewAnimal('${animal.own_animal_id}')">👁️ View</button>
+                            <button class="btn-small btn-delete" onclick="deleteAnimal('${animal.own_animal_id}', '${animal.own_animal_name}')">🗑️ Delete</button>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Search animals
+        function searchAnimals(event) {
+            event.preventDefault();
+            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+            
+            if (!searchTerm) {
+                displayAnimals(allAnimals);
+                return;
+            }
+
+            const filteredAnimals = allAnimals.filter(animal => 
+                animal.own_animal_name.toLowerCase().includes(searchTerm) ||
+                animal.own_animal_type.toLowerCase().includes(searchTerm) ||
+                animal.own_animal_breed.toLowerCase().includes(searchTerm)
+            );
+
+            displayAnimals(filteredAnimals);
+        }
+
+        // Clear search
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            displayAnimals(allAnimals);
+        }
+
+        // View animal details
+        function viewAnimal(animalId) {
+            window.open(`animal_view.html?id=${animalId}`, '_blank');
+        }
+
+        // Delete animal
+        async function deleteAnimal(animalId, animalName) {
+            if (!confirm(`Are you sure you want to delete ${animalName}? This action cannot be undone.`)) {
+                return;
+            }
+
+            try {
+                const token = localStorage.getItem('token') || 'demo_token';
+                const response = await fetch(`/Jodettu/Animals/delete/${animalId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Failed to delete animal: ${response.statusText}`);
+                }
+
+                showMessage(`${animalName} has been deleted successfully`, 'success');
+                loadAnimals(); // Reload the list
+
+            } catch (error) {
+                showMessage(`Error deleting animal: ${error.message}`, 'error');
+            }
+        }
+
+        // Refresh animals
+        function refreshAnimals() {
+            loadAnimals();
+        }
+
+        // Show message
+        function showMessage(text, type) {
+            const messageEl = document.getElementById('message');
+            messageEl.textContent = text;
+            messageEl.className = `message ${type} show`;
+            
+            setTimeout(() => {
+                messageEl.classList.remove('show');
+            }, 5000);
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAnimals();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+.git/
+.gitignore
+Dockerfile
+docker-compose.yml
+README.md
+*.md
+*.log
+.idea/
+.vscode/
+*.swp
+*.swo
+*.db
+*.sqlite3
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Data directories
+data/raw/
+data/processed/
+
+# Model files (ensure YOLO model is included)
+# models/*.pth
+# models/*.pt
+# Keep yolov8n.pt in root directory
+
+# Uploads directory (will be mounted as volume)
+upload_files/

@@ -1,0 +1,11 @@
+names:
+  0: COW
+  1: horse
+  2: pig
+  3: sheep
+  4: undefined
+nc: 5
+path: C:\Users\CHIRANTH\Desktop\Agmin\JODETTU-main\JODETTU-main\data\processed
+test: test
+train: train
+val: val

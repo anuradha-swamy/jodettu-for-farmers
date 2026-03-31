@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 5
+names: ['COW', 'horse', 'pig', 'sheep', 'undefined']
+
+roboflow:
+  workspace: cvproject-d8hm5
+  project: cv-project-4-c
+  version: 3
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/cvproject-d8hm5/cv-project-4-c/dataset/3

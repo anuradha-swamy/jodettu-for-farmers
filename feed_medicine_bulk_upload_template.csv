@@ -1,0 +1,6 @@
+name,brand,composition,animal,manufacturer,price,expiry_date,images
+Premium Cattle Feed,NutriPlus,Protein 18%, Fiber 12%, Fat 4%, Calcium 1.2%,cow,AgriTech Industries,2500.00,2024-12-31,cattle_feed.jpg
+Poultry Starter Feed,ChickenBest,Protein 22%, Fiber 3%, Fat 5%, Vitamins A,D,E,chicken,Poultry Nutrition Co.,850.00,2024-09-15,poultry_feed.jpg
+Antibiotic Injection,VetoCare,Oxytetracycline 200mg/ml,cow,PharmaVet Solutions,450.00,2025-06-30,antibiotic_vial.jpg
+Deworming Tablets,WormAway,Albendazole 600mg,sheep,Livestock Health Ltd.,120.00,2024-11-20,deworm_tablets.jpg
+Goat Growth Feed,GoatNutri,Protein 16%, Fiber 14%, Fat 3%, Minerals,goat,Specialty Animal Feeds,1800.00,2024-10-30,goat_feed.jpg

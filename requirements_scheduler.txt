@@ -1,0 +1,5 @@
+# Add this to your existing requirements.txt or install separately:
+apscheduler>=3.10.0
+
+# Or install with pip:
+# pip install apscheduler

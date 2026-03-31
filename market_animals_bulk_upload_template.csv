@@ -1,0 +1,11 @@
+own_animal_type,own_animal_breed,own_animal_name,own_animal_age,own_animal_height,own_animal_weight,own_animal_last_vacc,market_price,latitude,longitude,is_verified,own_animal_desc,images
+cow,holstein,Bessie,4,150.5,600.0,2024-01-15T10:30:00,25000.00,13.0827,80.2707,true,Healthy dairy cow with excellent milk production,bessie.jpg
+cow,jersey,Daisy,3,140.2,450.0,2024-02-20T14:15:00,22000.00,12.9765,80.2341,false,Gentle jersey cow perfect for small farms,daisy.jpg
+ox,brahman,Bullseye,5,165.8,850.0,2024-03-10T09:00:00,35000.00,13.0542,80.1827,true,Strong ox ideal for farm work,bullseye.jpg
+goat,alpine,Luna,2,95.3,65.0,2024-01-25T11:45:00,8500.00,12.9984,80.2567,false,Healthy alpine goat with good milk yield,luna.jpg
+goat,boer,Billy,3,102.7,78.0,2024-02-15T16:30:00,9200.00,13.1234,80.3121,true,Boer goat excellent for meat production,billy.jpg
+cow,holstein,Rosie,6,152.1,620.0,2024-01-08T08:20:00,26500.00,12.8765,80.1987,false,Experienced dairy cow with consistent production,rosie.jpg
+ox,holstein,Max,4,168.3,880.0,2024-03-05T13:15:00,38000.00,13.0678,80.2890,true,Powerful holstein ox for heavy farm work,max.jpg
+goat,nubian,Cleo,3,98.5,72.0,2024-02-28T10:10:00,8800.00,12.9456,80.2234,false,Nubian goat with high butterfat milk,cleo.jpg
+cow,jersey,Sweetie,2,138.9,440.0,2024-01-18T15:45:00,21000.00,13.0345,80.2678,true,Young jersey cow with great potential,sweetie.jpg
+goat,saanen,Whitey,4,96.8,70.0,2024-03-12T12:30:00,9000.00,12.9678,80.2456,false,White saanen goat with excellent temperament,whitey.jpg

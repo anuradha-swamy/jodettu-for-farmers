@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - MONGODB_URL=mongodb://mongodb:27017/
+      - PYTHONUNBUFFERED=1
+    depends_on:
+      - mongodb
+    volumes:
+      - ./app:/app/app
+      - ./data:/app/data
+      - ./models:/app/models
+      - ./upload_files:/app/upload_files
+    restart: unless-stopped
+
+  mongodb:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:

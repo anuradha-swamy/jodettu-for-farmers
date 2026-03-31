@@ -515,7 +515,7 @@ async def search_market_animal(animal_id: str):
     Search for a market animal by ID.
     """
     try:
-        return await OwnAnimalServices.search_market_animal_by_id(animal_id)
+        return OwnAnimalServices.search_market_animal_by_id(animal_id)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to search market animal: {str(e)}")
 

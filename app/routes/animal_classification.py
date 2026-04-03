@@ -17,7 +17,7 @@ from services.resnet_service import resnet_service
 
 router = APIRouter(
     prefix="/api/v1/animals",
-    tags=["animal_classification"],
+    tags=["Animal Classification"],
     responses={404: {"description": "Not found"}},
 )
 

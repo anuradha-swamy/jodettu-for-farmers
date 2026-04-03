@@ -12,15 +12,28 @@ def test_startup():
     print("🧪 Testing FastAPI startup without blocking...")
     
     # Kill any existing uvicorn processes
-    subprocess.run(["pkill", "-f", "uvicorn"], capture_output=True)
+    if os.name != "nt":
+        subprocess.run(["pkill", "-f", "uvicorn"], capture_output=True)
     time.sleep(2)
     
     # Start the server in background
     print("🚀 Starting FastAPI server...")
-    process = subprocess.Popen([
-        "python", "-m", "uvicorn", "main:app", 
-        "--host", "0.0.0.0", "--port", "9090"
-    ], stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    process = subprocess.Popen(
+        [
+            sys.executable,
+            "-m",
+            "uvicorn",
+            "app.main:app",
+            "--host",
+            "0.0.0.0",
+            "--port",
+            "9090",
+            "--app-dir",
+            ".",
+        ],
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+    )
     
     # Wait a moment for startup
     time.sleep(5)

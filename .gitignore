@@ -25,6 +25,4 @@ ext/run-tests.php
 ext/.deps
 ext/libtool
 .venv/
-__pycache__/
-*.pyc
 .env

@@ -10,6 +10,11 @@ from routes.login_routes import router as login_router
 from routes.animal_routes import router as animal_management_router
 from routes.feed_medicine_routes import router as feed_medicine_router
 from routes.machine_routes import router as machine_router
+from routes.ai_routes import router as ai_router
+from routes.enhanced_ai_routes import router as enhanced_ai_router
+from routes.notification_routes import router as notification_router
+from routes.product_routes import router as product_router
+from routes.wishlist_routes import router as wishlist_router
 from .utils.schemas import AnimalRecognitionResponse, ErrorResponse
 from .config import settings
 
@@ -46,6 +51,26 @@ app = FastAPI(
         {
             "name": "Health",
             "description": "Health check endpoints"
+        },
+        {
+            "name": "AI Services",
+            "description": "AI/ML endpoints including detection and classification"
+        },
+        {
+            "name": "Enhanced AI",
+            "description": "Enhanced AI endpoints for detailed analysis and training data"
+        },
+        {
+            "name": "Notifications",
+            "description": "Notification management endpoints"
+        },
+        {
+            "name": "Wishlist",
+            "description": "Wishlist management endpoints"
+        },
+        {
+            "name": "Products",
+            "description": "Product wishlist endpoints"
         }
     ]
 )
@@ -65,6 +90,11 @@ app.include_router(login_router, tags=["Authentication"])
 app.include_router(animal_management_router, tags=["Animal Management"])
 app.include_router(feed_medicine_router, tags=["Feed & Medicine"])
 app.include_router(machine_router, tags=["Machine Management"])
+app.include_router(ai_router, tags=["AI Services"])
+app.include_router(enhanced_ai_router, tags=["Enhanced AI"])
+app.include_router(notification_router, tags=["Notifications"])
+app.include_router(product_router, tags=["Products"])
+app.include_router(wishlist_router, prefix="/wishlist", tags=["Wishlist"])
 
 # Lazy model loading - will be initialized on first request
 model = None

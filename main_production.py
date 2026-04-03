@@ -10,7 +10,8 @@ import asyncio
 import os
 
 # Load environment variables at the very beginning
-load_dotenv()
+# Use override=True to prefer local .env over any system-wide DATABASE_URL
+load_dotenv(override=True)
 
 # Import database initialization
 from db.async_db import init_postgres_db, close_postgres_db

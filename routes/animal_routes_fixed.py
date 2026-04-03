@@ -20,11 +20,11 @@ from db.async_db import get_postgres_db
 master_data_service = MasterDataService()
 router = APIRouter()
 
-print("🔧✅ FIXED animal_routes_fixed.py loaded - user_id parameter issue resolved")
-print("🖼️✅ IMAGE UPDATE ENDPOINTS ADDED - /animal/{id}/with-images, /animal/{id}/images, /animal/{id}/edit")
-print("🔄✅ REGULAR UPDATE ENDPOINT UPDATED - Now returns animal data with images")
-print("⚡✅ ASYNC/SYNC ISSUE FIXED - All MongoDB operations now synchronous")
-print("👁️✅ IMAGE DISPLAY ENHANCED - Regular update now shows existing images with displayable URLs")
+print("FIXED animal_routes_fixed.py loaded - user_id parameter issue resolved")
+print("INFO: IMAGE UPDATE ENDPOINTS ADDED - /animal/{id}/with-images, /animal/{id}/images, /animal/{id}/edit")
+print("INFO: REGULAR UPDATE ENDPOINT UPDATED - Now returns animal data with images")
+print("INFO: ASYNC/SYNC ISSUE FIXED - All MongoDB operations now synchronous")
+print("INFO: IMAGE DISPLAY ENHANCED - Regular update now shows existing images with displayable URLs")
 
 
 @router.get("/debug/routes-info")
@@ -297,21 +297,21 @@ async def list_all_animals(current_user: dict = Depends(Security.get_current_use
     try:
         # Extract user_id from current_user token
         user_id = current_user.get("user_id")
-        print(f"🔍 DEBUG: list_all_animals called with user_id: {user_id}")
+        print(f"DEBUG: list_all_animals called with user_id: {user_id}")
         if not user_id:
             raise HTTPException(
                 status_code=status.HTTP_401_UNAUTHORIZED,
                 detail="User ID not found in token. Please re-authenticate."
             )
-        print(f"🔍 DEBUG: Calling OwnAnimalServices.list_all_animals({user_id})")
+        print(f"DEBUG: Calling OwnAnimalServices.list_all_animals({user_id})")
         result = OwnAnimalServices.list_all_animals(user_id)
-        print(f"🔍 DEBUG: Successfully retrieved {len(result)} animals")
+        print(f"DEBUG: Successfully retrieved {len(result)} animals")
         return result
     except Exception as e:
-        print(f"🔍 DEBUG: Unexpected error in list_all_animals: {str(e)}")
-        print(f"🔍 DEBUG: Error type: {type(e)}")
+        print(f"DEBUG: Unexpected error in list_all_animals: {str(e)}")
+        print(f"DEBUG: Error type: {type(e)}")
         import traceback
-        print(f"🔍 DEBUG: Full traceback: {traceback.format_exc()}")
+        print(f"DEBUG: Full traceback: {traceback.format_exc()}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=f"Failed to retrieve animals: {str(e)}"

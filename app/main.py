@@ -86,10 +86,10 @@ app.add_middleware(
 
 # Include routers
 app.include_router(animal_router)
-app.include_router(login_router, tags=["Authentication"])
-app.include_router(animal_management_router, tags=["Animal Management"])
-app.include_router(feed_medicine_router, tags=["Feed & Medicine"])
-app.include_router(machine_router, tags=["Machine Management"])
+app.include_router(login_router, prefix="/Jodettu/Auth", tags=["Authentication"])
+app.include_router(animal_management_router, prefix="/Jodettu/Animals", tags=["Animal Management"])
+app.include_router(feed_medicine_router, prefix="/Jodettu/Market", tags=["Feed & Medicine"])
+app.include_router(machine_router, prefix="/Jodettu/Machines", tags=["Machine Management"])
 app.include_router(ai_router, tags=["AI Services"])
 app.include_router(enhanced_ai_router, tags=["Enhanced AI"])
 app.include_router(notification_router, tags=["Notifications"])
